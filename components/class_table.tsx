@@ -1,12 +1,45 @@
+"use client"
 import PlusMinusButton from "@/components/ui/plus_minus_button";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 
-export default function ClassTable() {
+export default function ClassTable({params}) {
   // Liste mit den Daten für die Tabelle
-  let tableData = [
-    { id: 1, name: "Cy Ganderton", mitarbeit: 2, anwesenheit: 45 },
-    { id: 2, name: "Hart Hagerty", mitarbeit: 3, anwesenheit: 23 },
-    { id: 3, name: "Brice Swyre", mitarbeit: 4, anwesenheit: 100 },
-  ];
+  const [notes, setNotes] = useState<any>([])
+
+  useEffect(() => {
+
+    let db_name = "class_5aWP";
+
+    const supabase = createClient();
+
+
+    type Note = {
+      id: number;
+      name: string;
+      participation: number;
+      attendance: number;
+      // Add other fields as per your "notes" table
+    };
+
+    const loadData = async () => {
+      const { data, error } = await supabase
+        .from(db_name) // Type assertion for the "notes" table
+        .select('*');
+
+      if (error) {
+        console.error(error);
+      } else if (data) {
+        setNotes(data);
+
+        console.log(data);
+
+      }
+    }
+    loadData();
+
+  }, [])
+
 
   return (
     <div className="overflow-x-auto">
@@ -22,22 +55,24 @@ export default function ClassTable() {
         </thead>
         <tbody>
           {/* Dynamische Erstellung der Zeilen */}
-          {tableData.map((row, index) => (
+          {notes.map((row:any) => (
             <tr key={row.id}>
               <th>{row.id}</th>
               <td>{row.name}</td>
               <td>
                 <div className="flex gap-5 items-center">
-              <div className="flex gap-1">
+                  <div className="flex gap-1">
                     <PlusMinusButton type="+" />
                     <PlusMinusButton type="-" />
                   </div>
-                {row.mitarbeit}%</div>
+                  {row.participation}%</div>
               </td>
-              <div className="flex gap-1">
-              <PlusMinusButton type="-" />
-              <td>{row.anwesenheit}%</td>
-              </div>
+              <td>
+                <div className="flex gap-5 items-center">
+                  <PlusMinusButton type="-" />
+                  {row.attendance}%
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

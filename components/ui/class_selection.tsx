@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ClassSelection () {
 
-    let classes = ["4cWI", "2cWI", "5cWI"];
+    let classes = ["4cWI", "2cWI", "5aWP"];
 
 
     return (
