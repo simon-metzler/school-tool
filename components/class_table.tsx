@@ -1,18 +1,17 @@
-"use client"
+"use client";
 import PlusMinusButton from "@/components/ui/plus_minus_button";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 
-export default function ClassTable({params}) {
+export default function ClassTable({ params }) {
   // Liste mit den Daten für die Tabelle
-  const [notes, setNotes] = useState<any>([])
+  const [notes, setNotes] = useState<any>([]);
 
   useEffect(() => {
-
-    let db_name = "class_5aWP";
+    let db_name = "class_" + params.class_name;
+    console.log(db_name);
 
     const supabase = createClient();
-
 
     type Note = {
       id: number;
@@ -25,7 +24,7 @@ export default function ClassTable({params}) {
     const loadData = async () => {
       const { data, error } = await supabase
         .from(db_name) // Type assertion for the "notes" table
-        .select('*');
+        .select("*");
 
       if (error) {
         console.error(error);
@@ -33,13 +32,10 @@ export default function ClassTable({params}) {
         setNotes(data);
 
         console.log(data);
-
       }
-    }
+    };
     loadData();
-
-  }, [])
-
+  }, []);
 
   return (
     <div className="overflow-x-auto">
@@ -55,21 +51,22 @@ export default function ClassTable({params}) {
         </thead>
         <tbody>
           {/* Dynamische Erstellung der Zeilen */}
-          {notes.map((row:any) => (
+          {notes.map((row: any) => (
             <tr key={row.id}>
               <th>{row.id}</th>
               <td>{row.name}</td>
               <td>
                 <div className="flex gap-5 items-center">
                   <div className="flex gap-1">
-                    <PlusMinusButton type="+" />
-                    <PlusMinusButton type="-" />
+                    <PlusMinusButton type="+" params={params} id={row.id} />
+                    <PlusMinusButton type="-" params={params} id={row.id}/>
                   </div>
-                  {row.participation}%</div>
+                  {row.participation}%
+                </div>
               </td>
               <td>
                 <div className="flex gap-5 items-center">
-                  <PlusMinusButton type="-" />
+                  <PlusMinusButton type="-" params={params} id={row.id}/>
                   {row.attendance}%
                 </div>
               </td>
