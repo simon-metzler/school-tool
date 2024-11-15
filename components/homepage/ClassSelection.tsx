@@ -4,15 +4,14 @@ import { useEffect, useState } from "react";
 
 export default function ClassSelection() {
 
-    const [classes, setClasses] = useState<string[]>([]);
+    const [classes, setClasses] = useState<{ id: string, name: string }[]>([]);
 
     useEffect(() => {
         const getClasses = async () => {
             const fetchedClasses = await fetchClasses();
             if (fetchedClasses) {
-                setClasses(fetchedClasses.map((cls: any) => cls.name));
+                setClasses(fetchedClasses);
             }
-            console.log(fetchedClasses);
         };
 
         getClasses();
@@ -23,8 +22,8 @@ export default function ClassSelection() {
             <div className="flex flex-col">
                 <p className="text-md font-bold">Select your class:</p>
                 <div className="flex flex-wrap">
-                    {classes.map((c, index) => {
-                        return <a key={index} href={`/dashboard/${c}`} className="btn m-2">{c}</a>
+                    {classes.map((c) => {
+                        return <a key={c.id} href={`/dashboard/${c.id}`} className="btn m-2">{c.name}</a>
                     })}
                 </div>
             </div>

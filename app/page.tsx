@@ -1,4 +1,4 @@
-import ClassSelection from "@/components/homepage/class_selection";
+import ClassSelection from "@/components/homepage/ClassSelection";
 
 export default async function Index() {
   return (
