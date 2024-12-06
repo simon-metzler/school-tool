@@ -36,3 +36,16 @@ export const addAttendance = async (s_id: number, is_present: any) => {
 
   console.log(data, error);
 };
+export const fetchAttendanceByStudent = async (s_id: number) => {
+  const { data, error } = await supabase
+    .from("attendance")
+    .select("*")
+    .eq("s_id", s_id);
+
+  if (error) {
+    console.error("Error fetching attendance data:", error);
+    return null;
+  }
+
+  return data;
+};

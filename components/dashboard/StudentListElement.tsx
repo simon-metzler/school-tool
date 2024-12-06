@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { addAttendance } from "@/lib/supabase";
+import Link from "next/link";
 
 export default function StudentListElement({ student_data }: any) {
   return (
@@ -35,6 +36,11 @@ export default function StudentListElement({ student_data }: any) {
             <button className="btn">-</button>
           </div>
         </div>
+      </td>
+      <td>
+        <Link href={"/student/" + student_data.student.id}>
+          <button className="btn">Profile</button>
+        </Link>
       </td>
     </tr>
   );
