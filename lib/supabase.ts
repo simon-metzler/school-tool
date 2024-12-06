@@ -21,3 +21,18 @@ export const fetchStudents = async (class_id: number) => {
 
   return data;
 };
+
+export const addAttendance = async (s_id: number, is_present: any) => {
+  const { data, error } = await supabase
+    .from("attendance")
+    .insert([
+      {
+        s_id: s_id,
+        timestamp: new Date().toISOString(),
+        is_present: is_present,
+      },
+    ])
+    .select();
+
+  console.log(data, error);
+};

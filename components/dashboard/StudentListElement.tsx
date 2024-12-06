@@ -1,19 +1,7 @@
 import { useEffect, useState } from "react";
+import { addAttendance } from "@/lib/supabase";
 
 export default function StudentListElement({ student_data }: any) {
-  const [attandance, setAttandance] = useState(student_data.student.attandance);
-  const [participation, setParticipation] = useState(
-    student_data.student.participation
-  );
-
-  function updateAttandance(amount: number) {
-    setAttandance(attandance + amount);
-  }
-
-  function updateParticipation(amount: number) {
-    setParticipation(participation + amount);
-  }
-
   return (
     <tr>
       <th>{student_data.student.id}</th>
@@ -22,12 +10,18 @@ export default function StudentListElement({ student_data }: any) {
       </td>
       <td>
         <div className="flex gap-5 items-center">
-          {attandance}%
+          {10}%
           <div className="flex gap-1">
-            <button onClick={() => updateAttandance(10)} className="btn">
+            <button
+              onClick={() => addAttendance(student_data.student.id, true)}
+              className="btn"
+            >
               +
             </button>
-            <button onClick={() => updateAttandance(-10)} className="btn">
+            <button
+              onClick={() => addAttendance(student_data.student.id, false)}
+              className="btn"
+            >
               -
             </button>
           </div>
@@ -35,14 +29,10 @@ export default function StudentListElement({ student_data }: any) {
       </td>
       <td>
         <div className="flex gap-5 items-center">
-          {participation}%
+          {10}%
           <div className="flex gap-1">
-            <button onClick={() => updateParticipation(10)} className="btn">
-              +
-            </button>
-            <button onClick={() => updateParticipation(-10)} className="btn">
-              -
-            </button>
+            <button className="btn">+</button>
+            <button className="btn">-</button>
           </div>
         </div>
       </td>
