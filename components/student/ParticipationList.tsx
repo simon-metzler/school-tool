@@ -1,15 +1,15 @@
 "use client";
-import { fetchAttendanceByStudent } from "@/lib/supabase";
+import { fetchParticipationByStudent } from "@/lib/supabase";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-export default function AttendanceList() {
-  const [attendance, setAttendance] = useState([]);
+export default function ParticipationList() {
+  const [participation, setParticipation] = useState([]);
   const params: any = useParams();
 
   useEffect(() => {
     async function getAttendance() {
-      const data: any = await fetchAttendanceByStudent(params.student_id);
-      setAttendance(data);
+      const data: any = await fetchParticipationByStudent(params.student_id);
+      setParticipation(data);
     }
     getAttendance();
   }, []);
@@ -21,11 +21,11 @@ export default function AttendanceList() {
           <tr>
             <th></th>
             <th>Date</th>
-            <th>Is Present</th>
+            <th>Type</th>
           </tr>
         </thead>
         <tbody>
-          {attendance.map((record: any, index: number) => (
+          {participation.map((record: any, index: number) => (
             <tr key={index}>
               <th>{index + 1}</th>
               <td>
@@ -38,7 +38,7 @@ export default function AttendanceList() {
                   second: "2-digit",
                 })}
               </td>
-              <td>{record.is_present ? "Anwesend" : "Abwesend"}</td>
+              <td>{record.type}</td>
             </tr>
           ))}
         </tbody>

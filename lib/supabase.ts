@@ -49,3 +49,16 @@ export const fetchAttendanceByStudent = async (s_id: number) => {
 
   return data;
 };
+export const fetchParticipationByStudent = async (s_id: number) => {
+  const { data, error } = await supabase
+    .from("participation")
+    .select("*")
+    .eq("s_id", s_id);
+
+  if (error) {
+    console.error("Error fetching participation data:", error);
+    return null;
+  }
+
+  return data;
+};
