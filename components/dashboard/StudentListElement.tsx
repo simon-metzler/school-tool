@@ -2,17 +2,17 @@ import { use, useEffect, useState } from "react";
 import {
   addAttendance,
   addParticipation,
-  fetchAttendancePercentage,
+  fetchAttendanceValue,
   fetchParticipationPercentage,
 } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function StudentListElement({ student_data }: any) {
+export default function StudentListElement({ student_data }: any, {cause}: {cause:string}) {
   const [attendance, setAttendance] = useState([]);
   const [participation, setParticipation] = useState([]);
 
   async function getAttendance() {
-    const data: any = await fetchAttendancePercentage(student_data.student.id);
+    const data: any = await fetchAttendanceValue(student_data.student.id);
     setAttendance(data);
   }
 
@@ -39,7 +39,7 @@ export default function StudentListElement({ student_data }: any) {
       </td>
       <td>
         <div className="flex gap-5 items-center">
-          {attendance}%
+          {attendance} mal gefehlt
           <div className="flex gap-1">
             <button
               onClick={() => {
@@ -69,7 +69,7 @@ export default function StudentListElement({ student_data }: any) {
             <button
               className="btn"
               onClick={() => {
-                addParticipation(student_data.student.id, "+");
+                addParticipation(student_data.student.id, "+", cause);
                 getParticipation();
               }}
             >
@@ -78,7 +78,7 @@ export default function StudentListElement({ student_data }: any) {
             <button
               className="btn"
               onClick={() => {
-                addParticipation(student_data.student.id, "-");
+                addParticipation(student_data.student.id, "-", cause);
                 getParticipation();
               }}
             >

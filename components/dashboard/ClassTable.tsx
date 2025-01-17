@@ -4,7 +4,7 @@ import { fetchStudents } from "@/lib/supabase";
 import { useParams } from "next/navigation";
 import StudentListElement from "./StudentListElement";
 
-export default function ClassTable() {
+export default function ClassTable({cause}: {cause:string}) {
   const [students, setStudents] = useState([]);
   const params: any = useParams();
 
@@ -33,6 +33,7 @@ export default function ClassTable() {
             <StudentListElement
               key={student_data.student.id}
               student_data={student_data}
+              cause={cause}
             />
           ))}
         </tbody>

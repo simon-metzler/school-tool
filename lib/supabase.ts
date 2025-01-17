@@ -49,7 +49,7 @@ export const fetchAttendanceByStudent = async (s_id: number) => {
 
   return data;
 };
-export const fetchAttendancePercentage = async (s_id: number) => {
+export const fetchAttendanceValue = async (s_id: number) => {
   const { data, error } = await supabase
     .from("attendance")
     .select("is_present")
@@ -69,9 +69,9 @@ export const fetchAttendancePercentage = async (s_id: number) => {
     (record: any) => record.is_present
   ).length;
 
-  return Math.floor((attendedClasses / totalClasses) * 100);
+  return attendedClasses;
 };
-export const addParticipation = async (s_id: number, type: string) => {
+export const addParticipation = async (s_id: number, type: string, cause:string) => {
   const { data, error } = await supabase
     .from("participation")
     .insert([
@@ -79,6 +79,7 @@ export const addParticipation = async (s_id: number, type: string) => {
         s_id: s_id,
         timestamp: new Date().toISOString(),
         type: type,
+        cause: cause,
       },
     ])
     .select();
