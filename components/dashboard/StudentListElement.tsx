@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   addAttendance,
   addParticipation,
@@ -7,7 +7,7 @@ import {
 } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function StudentListElement({ student_data }: any, {cause}: {cause:string}) {
+export default function StudentListElement({ student_data, cause }: {student_data:any, cause:string}) {
   const [attendance, setAttendance] = useState([]);
   const [participation, setParticipation] = useState([]);
 
@@ -49,15 +49,6 @@ export default function StudentListElement({ student_data }: any, {cause}: {caus
               className="btn"
             >
               +
-            </button>
-            <button
-              onClick={() => {
-                addAttendance(student_data.student.id, false);
-                getAttendance();
-              }}
-              className="btn"
-            >
-              -
             </button>
           </div>
         </div>

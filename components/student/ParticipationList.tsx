@@ -22,6 +22,7 @@ export default function ParticipationList() {
             <th></th>
             <th>Date</th>
             <th>Type</th>
+            <th>Cause</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@ export default function ParticipationList() {
                 })}
               </td>
               <td>{record.type}</td>
+              <td>{record.cause}</td>
             </tr>
           ))}
         </tbody>
