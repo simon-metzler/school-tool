@@ -7,7 +7,7 @@ import {
 } from "@/lib/supabase";
 import Link from "next/link";
 
-export default function StudentListElement({ student_data, cause }: {student_data:any, cause:string}) {
+export default function StudentListElement({ student_data, cause, id }: {student_data:any, cause:string, id:number}) {
   const [attendance, setAttendance] = useState([]);
   const [participation, setParticipation] = useState([]);
 
@@ -33,7 +33,7 @@ export default function StudentListElement({ student_data, cause }: {student_dat
 
   return (
     <tr>
-      <th>{student_data.student.id}</th>
+      <th>{id}</th>
       <td>
         {student_data.student.firstname + " " + student_data.student.lastname}
       </td>

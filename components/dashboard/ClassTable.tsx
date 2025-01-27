@@ -29,11 +29,12 @@ export default function ClassTable({cause}: {cause:string}) {
           </tr>
         </thead>
         <tbody>
-          {students.map((student_data: any) => (
+          {students.map((student_data: any, index:number) => (
             <StudentListElement
               key={student_data.student.id}
               student_data={student_data}
               cause={cause}
+              id={index+1}
             />
           ))}
         </tbody>
