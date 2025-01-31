@@ -5,11 +5,11 @@ export default function Page({ params }: { params: any }) {
   return (
     <div className="flex justify-evenly">
       <div>
-        <h1>Attendance</h1>
+        <h1>Anwesenheit</h1>
         <AttendanceList />
       </div>
       <div>
-        <h1>Participation</h1>
+        <h1>Mitarbeit</h1>
         <ParticipationList />
       </div>
     </div>

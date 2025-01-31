@@ -20,9 +20,9 @@ export default function ParticipationList() {
         <thead>
           <tr>
             <th></th>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Cause</th>
+            <th>Datum</th>
+            <th>Typ</th>
+            <th>Mitarbeitsgrund</th>
           </tr>
         </thead>
         <tbody>

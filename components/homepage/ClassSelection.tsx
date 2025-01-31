@@ -19,11 +19,11 @@ export default function ClassSelection() {
 
     return (
         <div className="flex justify-center">
-            <div className="flex flex-col">
-                <p className="text-md font-bold">Select your class:</p>
-                <div className="flex flex-wrap">
+            <div className="flex flex-col items-center">
+                <p className="text-md font-bold">Klassenauswahl:</p>
+                <div className="flex flex-wrap justify-center">
                     {classes.map((c) => {
-                        return <a key={c.id} href={`/dashboard/${c.id}`} className="btn m-2">{c.name}</a>
+                        return <a key={c.id} href={`/dashboard/${c.id}`} className="btn m-2 w-24 h-24">{c.name}</a>
                     })}
                 </div>
             </div>

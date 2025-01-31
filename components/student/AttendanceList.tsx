@@ -20,8 +20,8 @@ export default function AttendanceList() {
         <thead>
           <tr>
             <th></th>
-            <th>Date</th>
-            <th>Is Present</th>
+            <th>Datum</th>
+            <th>Typ</th>
           </tr>
         </thead>
         <tbody>
