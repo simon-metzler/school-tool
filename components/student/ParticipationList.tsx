@@ -23,6 +23,7 @@ export default function ParticipationList() {
             <th>Datum</th>
             <th>Typ</th>
             <th>Mitarbeitsgrund</th>
+            <th>Aktion</th>
           </tr>
         </thead>
         <tbody>
@@ -30,17 +31,28 @@ export default function ParticipationList() {
             <tr key={index}>
               <th>{index + 1}</th>
               <td>
-                {new Date(record.timestamp).toLocaleString("de-DE", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                })}
+              <input
+                  type="date"
+                  value={new Date(record.timestamp).toISOString().split("T")[0]}
+                  placeholder="Type here"
+                  className="input w-full max-w-xs"
+                />
               </td>
-              <td>{record.type}</td>
-              <td>{record.cause}</td>
+              <td><select
+                  className="select w-full max-w-xs"
+                  value={record.is_present ? "+" : "-"}
+                >
+                  <option disabled>Anwesenheit Auswahl</option>
+                  <option value="+">+</option>
+                  <option value="-">-</option>
+                </select></td>
+              <td><input type="text" value={record.cause} placeholder="Type here" className="input w-full max-w-xs" /></td>
+              <td>
+                <div className="flex gap-2">
+                <button className="btn">Save</button>
+                <button className="btn">Delete</button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

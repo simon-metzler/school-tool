@@ -1,5 +1,5 @@
 "use client";
-import ClassTable from "@/components/dashboard/ClassTable";
+import ClassTable from "@/components/dashboard/StudentList";
 import ParticipationField from "@/components/dashboard/ParticipationField";
 import { useState } from "react";
 

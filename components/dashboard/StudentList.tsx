@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { fetchStudents } from "@/lib/supabase";
 import { useParams } from "next/navigation";
-import StudentListElement from "./StudentListElement";
+import StudentListElement from "./StudentElement";
 
 export default function ClassTable({cause}: {cause:string}) {
   const [students, setStudents] = useState([]);

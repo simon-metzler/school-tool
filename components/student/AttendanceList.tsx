@@ -22,6 +22,7 @@ export default function AttendanceList() {
             <th></th>
             <th>Datum</th>
             <th>Typ</th>
+            <th>Aktion</th>
           </tr>
         </thead>
         <tbody>
@@ -29,16 +30,29 @@ export default function AttendanceList() {
             <tr key={index}>
               <th>{index + 1}</th>
               <td>
-                {new Date(record.timestamp).toLocaleString("de-DE", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                })}
+                <input
+                  type="date"
+                  value={new Date(record.timestamp).toISOString().split("T")[0]}
+                  placeholder="Type here"
+                  className="input w-full max-w-xs"
+                />
               </td>
-              <td>{record.is_present ? "Anwesend" : "Abwesend"}</td>
+              <td>
+                <select
+                  className="select w-full max-w-xs"
+                  value={record.is_present ? "Anwesend" : "Abwesend"}
+                >
+                  <option disabled>Anwesenheit Auswahl</option>
+                  <option value="Anwesend">Anwesend</option>
+                  <option value="Abwesend">Abwesend</option>
+                </select>
+              </td>
+              <td>
+                <div className="flex gap-2">
+                  <button className="btn">Save</button>
+                  <button className="btn">Delete</button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
