@@ -2,6 +2,7 @@
 import { fetchAttendanceByStudent } from "@/lib/supabase";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
 export default function AttendanceList() {
   const [attendance, setAttendance] = useState([]);
   const params: any = useParams();
