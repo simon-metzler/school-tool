@@ -11,6 +11,7 @@ export default function ClassTable({cause}: {cause:string}) {
   useEffect(() => {
     async function getStudents() {
       const data: any = await fetchStudents(parseInt(params.class_name));
+      console.log(data)
       setStudents(data);
     }
 

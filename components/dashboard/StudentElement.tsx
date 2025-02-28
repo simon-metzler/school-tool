@@ -8,8 +8,8 @@ import {
 import Link from "next/link";
 
 export default function StudentListElement({ student_data, cause, id }: {student_data:any, cause:string, id:number}) {
-  const [attendance, setAttendance] = useState([]);
-  const [participation, setParticipation] = useState([]);
+  const [attendance, setAttendance] = useState(0);
+  const [participation, setParticipation] = useState(0);
 
   async function getAttendance() {
     const data: any = await fetchAttendanceValue(student_data.student.id);
@@ -24,12 +24,15 @@ export default function StudentListElement({ student_data, cause, id }: {student
   }
 
   useEffect(() => {
-    getAttendance();
+    const totalParticipations = student_data.student.participation.length;
+    const positiveParticipations =  student_data.student.participation.filter(
+    (record: any) => record.type === "+"
+    ).length;
+    setParticipation(Math.floor((positiveParticipations / totalParticipations) * 100) || 0);
+    setAttendance(student_data.student.attendance.length);
   }, []);
 
-  useEffect(() => {
-    getParticipation();
-  }, []);
+
 
   return (
     <tr>

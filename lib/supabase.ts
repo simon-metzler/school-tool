@@ -8,19 +8,6 @@ export const fetchClasses = async () => {
 
   return data;
 };
-export const fetchStudents = async (class_id: number) => {
-  const { data, error } = await supabase
-    .from("studentclass")
-    .select("student(*)")
-    .eq("c_id", class_id);
-
-  if (error) {
-    console.error("Fehler beim Abrufen der Daten:", error);
-    return null;
-  }
-
-  return data;
-};
 
 export const addAttendance = async (s_id: number, is_present: any) => {
   const { data, error } = await supabase
@@ -120,4 +107,21 @@ export const fetchParticipationPercentage = async (s_id: number) => {
   ).length;
 
   return Math.floor((positiveParticipations / totalParticipations) * 100);
+};
+
+export const fetchStudents = async (class_id: number) => {
+  const { data, error } = await supabase
+  .from("studentclass")
+  .select(`
+    student(*, attendance(*), participation(*))
+  `)
+  .eq("c_id", class_id);
+
+
+  if (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+
+  return data;
 };
