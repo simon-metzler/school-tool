@@ -31,22 +31,12 @@ export default function AttendanceList() {
             <tr key={index}>
               <th>{index + 1}</th>
               <td>
-                <input
-                  type="date"
-                  value={new Date(record.timestamp).toISOString().split("T")[0]}
-                  placeholder="Type here"
-                  className="input w-full max-w-xs"
-                />
+                  {new Date(record.timestamp).toISOString().split("T")[0]}
               </td>
               <td>
-                <select
-                  className="select w-full max-w-xs"
-                  value={record.is_present ? "Anwesend" : "Abwesend"}
-                >
-                  <option disabled>Anwesenheit Auswahl</option>
-                  <option value="Anwesend">Anwesend</option>
-                  <option value="Abwesend">Abwesend</option>
-                </select>
+
+                {record.is_present ? "Anwesend" : "Abwesend"}
+           
               </td>
               <td>
                 <div className="flex gap-2">

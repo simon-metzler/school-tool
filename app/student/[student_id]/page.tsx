@@ -3,7 +3,7 @@ import ParticipationList from "@/components/student/ParticipationList";
 
 export default function Page({ params }: { params: any }) {
   return (
-    <div className="flex justify-evenly">
+    <div className="flex justify-evenly gap-12">
       <div>
         <h1>Anwesenheit</h1>
         <AttendanceList />

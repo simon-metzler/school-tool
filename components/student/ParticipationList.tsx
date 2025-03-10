@@ -31,22 +31,14 @@ export default function ParticipationList() {
             <tr key={index}>
               <th>{index + 1}</th>
               <td>
-              <input
-                  type="date"
-                  value={new Date(record.timestamp).toISOString().split("T")[0]}
-                  placeholder="Type here"
-                  className="input w-full max-w-xs"
-                />
+
+                  {new Date(record.timestamp).toISOString().split("T")[0]}
+                  
               </td>
-              <td><select
-                  className="select w-full max-w-xs"
-                  value={record.is_present ? "+" : "-"}
-                >
-                  <option disabled>Anwesenheit Auswahl</option>
-                  <option value="+">+</option>
-                  <option value="-">-</option>
-                </select></td>
-              <td><input type="text" value={record.cause} placeholder="Type here" className="input w-full max-w-xs" /></td>
+              <td>
+                  {record.is_present ? "+" : "-"}
+                </td>
+              <td>{record.cause}</td>
               <td>
                 <div className="flex gap-2">
                 <button className="btn">Save</button>
